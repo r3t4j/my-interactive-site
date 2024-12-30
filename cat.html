@@ -30,6 +30,9 @@
             padding: 20px;
             border-radius: 10px;
             text-align: center;
+            left: 50%; /* initial left position */
+            top: 50%; /* initial top position */
+            transform: translate(-50%, -50%); /* center the popup */
         }
         #popup button {
             margin: 10px;
@@ -54,32 +57,34 @@
     <img id="catImage" src="https://i.imgur.com/uGcPmQW.jpeg" alt="Cute Cat">
 
     <script>
-        const startButton = document.getElementById('startButton');
-        const popup = document.getElementById('popup');
-        const noButton = document.getElementById('noButton');
-        const yesButton = document.getElementById('yesButton');
-        const catImage = document.getElementById('catImage');
+        document.addEventListener('DOMContentLoaded', () => {
+            const startButton = document.getElementById('startButton');
+            const popup = document.getElementById('popup');
+            const noButton = document.getElementById('noButton');
+            const yesButton = document.getElementById('yesButton');
+            const catImage = document.getElementById('catImage');
 
-        startButton.addEventListener('click', () => {
-            popup.style.display = 'block'; // عرض المربع
-            startButton.style.display = 'none'; // إخفاء زر "Start"
+            startButton.addEventListener('click', () => {
+                popup.style.display = 'block'; // عرض المربع
+                startButton.style.display = 'none'; // إخفاء زر "Start"
+            });
+
+            noButton.addEventListener('click', () => {
+                movePopup();  // تحريك المربع عند الضغط على No
+            });
+
+            yesButton.addEventListener('click', () => {
+                catImage.style.display = 'block';
+                popup.style.display = 'none';
+            });
+
+            function movePopup() {
+                let x = Math.random() * (window.innerWidth - 200);
+                let y = Math.random() * (window.innerHeight - 100);
+                popup.style.left = `${x}px`;
+                popup.style.top = `${y}px`;
+            }
         });
-
-        noButton.addEventListener('click', () => {
-            movePopup();  // تحريك المربع عند الضغط على No
-        });
-
-        yesButton.addEventListener('click', () => {
-            catImage.style.display = 'block';
-            popup.style.display = 'none';
-        });
-
-        function movePopup() {
-            let x = Math.random() * (window.innerWidth - 200);
-            let y = Math.random() * (window.innerHeight - 100);
-            popup.style.left = `${x}px`;
-            popup.style.top = `${y}px`;
-        }
     </script>
 </body>
 </html>
